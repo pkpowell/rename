@@ -46,7 +46,9 @@ while IFS= read -r -d '' source; do
             echo "Changing $source to $dest"
             mv -- "$source" "$dest"
         else 
-            echo "source $source dest $dest" 
+            echo "source $source" 
+            echo "dest $dest" 
+            echo
         fi
 
     fi
