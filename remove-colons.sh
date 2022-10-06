@@ -20,32 +20,33 @@ done
 # chars='[\\\\.,? ]'
 chars='[:]'
 
-find_regex="*${chars}*"
-replacement=$(printf '\uf022')
+rgx="*${chars}*"
+repl=$(printf '\uf022')
 
 find_cmd=(
     find
     .
     -depth 
-    -type d
-    -name "$find_regex"
+    #-type d
+    -name "$rgx"
     -print0 # delimit output with NUL characters
 )
 
 shopt -s extglob 
                            # turn on extended glob syntax
-while IFS= read -r -d '' source_name; do
+while IFS= read -r -d '' source; do
 
-    if [[ "$source_name" != "." ]]; then 
-		target_dir=${source_name##*/}
-        dest_name="${target_dir//:/${replacement}}" # replace ":"
-        #echo "dest $dest_name"
+    if [[ "$source" != "." ]]; then 
+		target=${source##*/}
+        dest="${target//:/$repl}"
+        #echo "target $target"
+        #echo "dest $dest"
         
         if [ "$d_flag" = true ];then
-            echo "Changing $source_name to $dest_name"
-            mv -- "$source_name" "$dest_name"
+            echo "Changing $source to $dest"
+            mv -- "$source" "$dest"
         else 
-            echo "source $source_name dest $dest_name" 
+            echo "source $source dest $dest" 
         fi
 
     fi
