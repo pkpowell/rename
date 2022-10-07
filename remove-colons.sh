@@ -47,7 +47,7 @@ while IFS= read -r -d '' source; do
         
         if [ "$d_flag" = true ];then
             echo "Changing $source to $dest"
-            mv -- "$source" "${dest}"
+            mv -- "${source}" "${dest}"
         else 
             echo "source ${source}" 
             echo "dest ${dest}" 
