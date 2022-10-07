@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 # LC_CTYPE=en_US.utf8
 
 d_flag=''
