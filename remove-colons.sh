@@ -47,7 +47,7 @@ while IFS= read -r -d '' source; do
             echo "Changing $source to $dest"
             mv -- "$source" "${dest}"
         else 
-            echo "path ${path}" 
+            echo "source ${source}" 
             echo "dest ${dest}" 
             echo
         fi
