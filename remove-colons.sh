@@ -1,5 +1,8 @@
-#!/bin/bash
-# LC_CTYPE=en_US.utf8
+#!/usr/bin/env bash
+
+LANGUAGE=en_US.UTF-8
+LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
 
 d_flag=''
 v_flag=''
