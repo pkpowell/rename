@@ -18,6 +18,7 @@ done
 
 
 chars='[:]'
+count=0
 
 rgx="*${chars}*"
 repl=$(printf '\uf022')
@@ -42,6 +43,7 @@ while IFS= read -r -d '' source; do
         dest="${path}/${target//:/$repl}"
         # echo "target $target"
         # echo "dest $dest"
+        ((count++))
         
         if [ "$d_flag" = true ];then
             echo "Changing $source to $dest"
@@ -55,3 +57,5 @@ while IFS= read -r -d '' source; do
     fi
 
 done < <("${find_cmd[@]}") 
+
+echo "Found ${count} instances"
