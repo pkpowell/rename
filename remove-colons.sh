@@ -38,17 +38,17 @@ while IFS= read -r -d '' source; do
 
     if [[ "$source" != "." ]]; then 
         target=${source##*/}
-        path=${source/##*}
-        dest="${target//:/$repl}"
-        echo "target $target"
-        echo "path $path"
+        path=${source%/*}
+        dest="${path}/${target//:/$repl}"
+        # echo "target $target"
+        # echo "dest $dest"
         
         if [ "$d_flag" = true ];then
             echo "Changing $source to $dest"
-            mv -- "$source" "$dest"
+            mv -- "$source" "${dest}"
         else 
-            echo "source $source" 
-            echo "dest $dest" 
+            echo "source ${source}" 
+            echo "dest ${dest}" 
             echo
         fi
 
