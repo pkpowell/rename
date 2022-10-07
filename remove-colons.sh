@@ -16,8 +16,7 @@ while getopts 'd' flag; do
   esac
 done
 
-# chars to remove (incl backslash!)
-# chars='[\\\\.,? ]'
+
 chars='[:]'
 
 rgx="*${chars}*"
@@ -27,13 +26,14 @@ find_cmd=(
     find
     .
     -depth 
-    -type f
+    # -type f
     -name "$rgx"
     -print0 # delimit output with NUL characters
 )
 
+# turn on extended glob syntax
 shopt -s extglob 
-                           # turn on extended glob syntax
+
 while IFS= read -r -d '' source; do
 
     if [[ "$source" != "." ]]; then 
