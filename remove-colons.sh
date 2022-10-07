@@ -26,8 +26,8 @@ repl=$(printf '\uf022')
 find_cmd=(
     find
     .
-    # -depth 
-    #-type d
+    -depth 
+    -type f
     -name "$rgx"
     -print0 # delimit output with NUL characters
 )
@@ -37,10 +37,11 @@ shopt -s extglob
 while IFS= read -r -d '' source; do
 
     if [[ "$source" != "." ]]; then 
-		target=${source##*/}
+        target=${source##*/}
+        path=${source/##*}
         dest="${target//:/$repl}"
-        #echo "target $target"
-        #echo "dest $dest"
+        echo "target $target"
+        echo "path $path"
         
         if [ "$d_flag" = true ];then
             echo "Changing $source to $dest"
