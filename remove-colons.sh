@@ -2,15 +2,16 @@
 # LC_CTYPE=en_US.utf8
 
 d_flag=''
-verbose='false'
+v_flag=''
 
 print_usage() {
-  printf "Usage: -d make changes"
+  printf "Usage: -d make changes, -v verbose"
 }
 
-while getopts 'd' flag; do
+while getopts 'dv' flag; do
   case "${flag}" in
     d) d_flag=true ;;
+    v) v_flag=true ;;
     *) print_usage
        exit 1 ;;
   esac
@@ -46,12 +47,16 @@ while IFS= read -r -d '' source; do
         ((count++))
         
         if [ "$d_flag" = true ];then
-            echo "Changing $source to $dest"
+            if [ "$v_flag" = true ];then
+                echo "Changing $source to $dest"
+            fi
             mv -- "${source}" "${dest}"
         else 
-            echo "source ${source}" 
-            echo "dest ${dest}" 
-            echo
+            if [ "$v_flag" = true ];then
+                echo "source ${source}" 
+                echo "dest ${dest}" 
+                echo
+            fi
         fi
 
     fi
