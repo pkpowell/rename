@@ -76,9 +76,12 @@ while IFS= read -r -d '' source; do
                 echo
             fi
         fi
-
     fi
 
-done < <("${find_cmd[@]}") 
+done < <("${find_cmd[@]}")
 
-echo "Found ${count} instances"
+if [ "$d_flag" = true ];then
+    echo "Repaired ${count} instances"
+else
+    echo "Found ${count} instances"
+fi
