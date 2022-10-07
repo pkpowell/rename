@@ -13,23 +13,34 @@ print_usage() {
 
 while getopts 'dvh' flag; do
   case "${flag}" in
-    d) d_flag=true ;;
-    v) v_flag=true ;;
+    d) d_flag=true
+       shift 1 ;;
+    v) v_flag=true 
+       shift 1 ;;
     h | *) print_usage
        exit 1 ;;
   esac
 done
 
-args=("$@")
-if [[ ${#args[@]} -gt 0 ]];then
-    echo "args ${args[@]}"
-fi
+repl=$(printf '\uf022')
+
+# args=("$@")
+# if [[ ${#args[@]} -gt 0 ]];then
+#     echo "args ${args[@]}"
+#     if [[ -d "${args[0]}" ]];then
+#         if [ "$d_flag" = true ];then
+#             echo "repairing ${args[0]}"
+#             mv -- "${args[0]}" "${args[0]//:/$repl}"
+#         else
+#             echo "pre ${args[0]} post ${args[0]//:/$repl}"
+#         fi
+#         exit 0
+#     fi
+# fi
 
 chars='[:]'
 count=0
-
 rgx="*${chars}*"
-repl=$(printf '\uf022')
 
 find_cmd=(
     find
@@ -49,13 +60,13 @@ while IFS= read -r -d '' source; do
         target=${source##*/}
         path=${source%/*}
         dest="${path}/${target//:/$repl}"
-        # echo "target $target"
-        # echo "dest $dest"
+
         ((count++))
-        
+
         if [ "$d_flag" = true ];then
             if [ "$v_flag" = true ];then
                 echo "Changing $source to $dest"
+                echo
             fi
             mv -- "${source}" "${dest}"
         else 
