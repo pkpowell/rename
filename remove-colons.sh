@@ -1,5 +1,5 @@
-#!/bin/bash
-LC_CTYPE=en_US.utf8
+#!/usr/local/bin/bash
+# LC_CTYPE=en_US.utf8
 
 d_flag=''
 verbose='false'
@@ -26,7 +26,7 @@ repl=$(printf '\uf022')
 find_cmd=(
     find
     .
-    -depth 
+    # -depth 
     #-type d
     -name "$rgx"
     -print0 # delimit output with NUL characters
