@@ -8,18 +8,22 @@ d_flag=''
 v_flag=''
 
 print_usage() {
-  printf "Usage: -d make changes, -v verbose"
+  printf "Usage: -d make changes, -v verbose, -h help"
 }
 
-while getopts 'dv' flag; do
+while getopts 'dvh' flag; do
   case "${flag}" in
     d) d_flag=true ;;
     v) v_flag=true ;;
-    *) print_usage
+    h | *) print_usage
        exit 1 ;;
   esac
 done
 
+args=("$@")
+if [[ ${#args[@]} -gt 0 ]];then
+    echo "args ${args[@]}"
+fi
 
 chars='[:]'
 count=0
