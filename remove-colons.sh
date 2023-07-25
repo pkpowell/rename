@@ -85,6 +85,10 @@ target=${source##*/}
 path=${source%/*}
 dest="${path}/${target//:/$repl}"
 
+echo "source ${source}" 
+echo "dest ${dest}" 
+echo
+
 if [ "$d_flag" = true ];then
     if [ "$v_flag" = true ];then
         echo "Changing $source to $dest"
