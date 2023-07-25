@@ -80,6 +80,24 @@ while IFS= read -r -d '' source; do
 
 done < <("${find_cmd[@]}")
 
+source=$(pwd)
+target=${source##*/}
+dest="${target//:/$repl}"
+
+if [ "$d_flag" = true ];then
+    if [ "$v_flag" = true ];then
+        echo "Changing $source to $dest"
+        echo
+    fi
+    mv -- "${source}" "${dest}"
+else 
+    if [ "$v_flag" = true ];then
+        echo "source ${source}" 
+        echo "dest ${dest}" 
+        echo
+    fi
+fi
+
 if [ "$d_flag" = true ];then
     echo "Repaired ${count} instances"
 else
