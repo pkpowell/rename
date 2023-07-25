@@ -82,7 +82,8 @@ done < <("${find_cmd[@]}")
 
 source=$(pwd)
 target=${source##*/}
-dest="${target//:/$repl}"
+path=${source%/*}
+dest="${path}/${target//:/$repl}"
 
 if [ "$d_flag" = true ];then
     if [ "$v_flag" = true ];then
